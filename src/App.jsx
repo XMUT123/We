@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+
 import PhotoCard from './components/PhotoCard';
 import PhotoDetail from './components/PhotoDetail';
 import './App.css';
@@ -15,11 +16,11 @@ const photos = [
   { image: gufeng4, title: '月光琉璃' },
 ];
 
-function App() {
+const MainContent = () => {
+  const navigate = useNavigate();
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={
+    <Routes>
+      <Route path="/" element={
           <div className="app">
             <h1 className="page-title">记录我们的故事</h1>
             <div className="photo-gallery">
@@ -28,7 +29,7 @@ function App() {
                   key={index}
                   image={photo.image}
                   title={photo.title}
-                  onClick={() => window.location.href = `/photo/${index}`}
+                  onClick={() => navigate(`/photo/${index}`)}
                 />
               ))}
             </div>
@@ -36,6 +37,13 @@ function App() {
         } />
         <Route path="/photo/:id" element={<PhotoDetail photos={photos} />} />
       </Routes>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <MainContent />
     </Router>
   );
 }
