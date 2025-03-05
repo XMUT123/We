@@ -11,6 +11,9 @@ const PhotoCard = ({ image, title, onClick }) => {
         alt={title}
         className={`photo-image ${isLoaded ? 'loaded' : ''}`}
         loading="lazy"
+        decoding="async"
+        fetchpriority="low"
+        sizes="(max-width: 768px) 100vw, 800px"
         onLoad={() => setIsLoaded(true)}
       />
       <div className="photo-title">{title}</div>

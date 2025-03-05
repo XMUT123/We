@@ -19,7 +19,15 @@ const PhotoDetail = ({ photos }) => {
         返回
       </button>
       <div className="detail-container">
-        <img src={photo.image} alt={photo.title} className="detail-image" />
+        <img 
+          src={photo.image} 
+          alt={photo.title} 
+          className="detail-image"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
+          sizes="(max-width: 768px) 100vw, 1200px"
+        />
         <div className="detail-info">
           <h2>{photo.title}</h2>
           <div className="detail-description">
@@ -34,15 +42,30 @@ const PhotoDetail = ({ photos }) => {
       <div className="related-photos">
         <h3>更多照片</h3>
         <div className="photo-grid">
-          <img src={photo.image} alt="相关照片1" className="related-image" onClick={() => setSelectedImage(photo.image)} />
-          <img src={photo.image} alt="相关照片2" className="related-image" onClick={() => setSelectedImage(photo.image)} />
-          <img src={photo.image} alt="相关照片3" className="related-image" onClick={() => setSelectedImage(photo.image)} />
-          <img src={photo.image} alt="相关照片4" className="related-image" onClick={() => setSelectedImage(photo.image)} />
+          {[...Array(4)].map((_, index) => (
+            <img
+              key={index}
+              src={photo.image}
+              alt={`相关照片${index + 1}`}
+              className="related-image"
+              onClick={() => setSelectedImage(photo.image)}
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
+              sizes="(max-width: 768px) 100vw, 600px"
+            />
+          ))}
         </div>
       </div>
       {selectedImage && (
         <div className="fullscreen-overlay" onClick={() => setSelectedImage(null)}>
-          <img src={selectedImage} alt="全屏图片" className="fullscreen-image" />
+          <img 
+            src={selectedImage} 
+            alt="全屏图片" 
+            className="fullscreen-image"
+            loading="eager"
+            decoding="sync"
+          />
         </div>
       )}
     </div>
