@@ -20,6 +20,15 @@
   height: 300px;
   object-fit: cover;
   transition: transform 0.3s ease;
+  opacity: 0;
+  filter: blur(10px);
+  transform: scale(1.1);
+}
+
+.photo-image.loaded {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
 }
 
 .photo-card:hover .photo-image {

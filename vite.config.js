@@ -13,10 +13,12 @@ export default defineConfig({
       }
     }
   },
+  assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg'],
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: true,
+    assetsInlineLimit: 4096,
     rollupOptions: {
       output: {
         chunkFileNames: 'assets/js/[name]-[hash].js',
@@ -25,6 +27,8 @@ export default defineConfig({
       }
     },
     minify: 'terser',
+    chunkSizeWarningLimit: 2000,
+    imageInlineSizeLimit: 4096,
     terserOptions: {
       compress: {
         drop_console: true,
